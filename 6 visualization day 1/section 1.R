@@ -52,7 +52,14 @@ penguins %>%
 
 # histogram with body_mass_g
 # add species as fill color, pay attention to position
-
+penguins %>% 
+  ggplot(mapping = aes(x = body_mass_g, color = species, fill = species )) + 
+  #color defines outline of column, determined by data
+      geom_histogram(alpha = .5, position = 'dodge', bins = 10) +#smart defaults - try first customize with attributes
+#alpha = opacacy, position = way data shown dodge = not stack, bins - number of columns, binwidth = width of column, static
+#can over write mapping aesthetic
+  theme_bw()+
+  labs(title = 'Whatever string', x = 'this is a weight', y = 'Count') #labels
 
 # density curves are sometimes nicer. Let's do the above but with 
 # a density curve. Alpha is nice here.
@@ -60,6 +67,9 @@ penguins %>%
 
 # bar charts with categoricals: quick, easy counts summary
 # stacked vs. side-by-side
+penguins %>% 
+  ggplot(aes(x = species, fill = sex)) +
+  geom_bar(position = 'dodge')
 
 
 
@@ -68,6 +78,9 @@ penguins %>%
 
 # Violin plots are cool. Lets look at body mass across islands
 # Notice what happens when we add color now
+penguins %>% 
+  ggplot(aes(x = island, y = body_mass_g, fill= species))+
+  geom_violin()
 
 
 # Bar plots with both x and  y are a bit more flexible.
@@ -78,7 +91,9 @@ penguins %>%
 
 # The classic scatter
 # Important: attributes vs aesthetics. Inheritance
-
+penguins %>% 
+  ggplot(aes(x= body_mass_g)) +
+  geom_dotplot()
 
 # can do bill depth vs length if we want
 
